@@ -1,0 +1,81 @@
+/*=============================================================================*
+*
+*   packages.drf
+*
+*   Purpose:    Display Resource File for IC-Packages
+*
+*   Author:     Matthias Schweikardt
+*   Email:      matthias.schweikardt@reutlingen-university.de
+*
+*   Copyright 2021 Reutlingen University, Electronics & Drives (Germany)
+*
+*   Permission is hereby granted, free of charge, to any person obtaining a 
+*   copy of this software and associated documentation files (the "Software"), 
+*   to deal in the Software without restriction, including without limitation 
+*   the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+*   and/or sell copies of the Software, and to permit persons to whom the 
+*   Software is furnished to do so, subject to the following conditions:
+*
+*   The above copyright notice and this permission notice shall be included in 
+*   all copies or substantial portions of the Software.
+*
+*   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+*   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+*   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+*   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+*   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+*   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+*   DEALINGS IN THE SOFTWARE.
+*
+*=============================================================================*/
+
+drDefineDisplay(
+;( DisplayName )
+ ( display     )
+)
+
+drDefineColor(
+;( DisplayName   ColorsName   Red      Green    Blue     )
+ ( display       cadetBlue    57       191      255      )
+ ( display       cyan         0        255      255      )
+ ( display       gold         217      204      0        )
+ ( display       lime         0        255      0        )
+ ( display       magenta      255      0        255      )
+ ( display       yellow       255      255      0        )
+)
+drDefineStipple(
+;( DisplayName   StippleName  Bitmap     )
+ ( display       dots_sel     ( ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  )
+                                ( 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  ) ) )
+)
+
+drDefineLineStyle(
+;( DisplayName   LineStyle    Size       Pattern  )
+ ( display       solid        1          (1 1 1 ) )
+ ( display       thickLine    3          (1 1 1 ) )
+ ( display       snasolid     3          (1 1 1 ) )
+)
+
+drDefinePacket(
+;( DisplayName  PacketName           Stipple    LineStyle  Fill       Outline    [FillStyle])
+ ( display      BOND                 blank      solid      gold       gold       solid     )
+ ( display      BOND_LBL             blank      solid      magenta    magenta    solid     )
+ ( display      DEF_CHIP             blank      snasolid   cyan       cyan       X         )
+ ( display      DEF_PAD              blank      thickLine  cadetBlue  cadetBlue  X         )
+ ( display      PKG_LBL              blank      solid      lime       lime       solid     )
+ ( display      PKG_MET              dots_sel   solid      yellow     yellow     outlineStipple)
+)
