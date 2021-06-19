@@ -11,7 +11,8 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
    button *Load...* .
    Follow the instructions from the screenshot and press *OK*.
 
-   ![](./figs/load-tech-file.png | width=200)
+	<img src="./figs/load-tech-file.png" width="200">
+
 3. Merge the *display.drf*.
 4. Go to the *CIW* and enter the command
 	``` scheme
