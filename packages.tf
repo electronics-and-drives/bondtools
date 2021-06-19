@@ -1,0 +1,67 @@
+/*=============================================================================*
+*
+*   packages.tf
+*
+*   Purpose:    Technology File for IC-Packages
+*
+*   Author:     Matthias Schweikardt
+*   Email:      matthias.schweikardt@reutlingen-university.de
+*
+*   Copyright 2021 Reutlingen University, Electronics & Drives (Germany)
+*
+*   Permission is hereby granted, free of charge, to any person obtaining a 
+*   copy of this software and associated documentation files (the "Software"), 
+*   to deal in the Software without restriction, including without limitation 
+*   the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+*   and/or sell copies of the Software, and to permit persons to whom the 
+*   Software is furnished to do so, subject to the following conditions:
+*
+*   The above copyright notice and this permission notice shall be included in 
+*   all copies or substantial portions of the Software.
+*
+*   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+*   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+*   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+*   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+*   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+*   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+*   DEALINGS IN THE SOFTWARE.
+*
+*=============================================================================*/
+
+controls(
+ techVersion("1.0")
+ mfgGridResolution(
+      ( 0.025000 )
+ )
+)
+
+layerDefinitions(
+
+  techLayers(
+    (PACKAGE_METALIZATION 133  PKG_MET )
+    (PACKAGE_LABEL        134  PKG_LBL )
+    (BONDWIRE             135  BOND    )
+    (BOND_LABEL           136  BOND_LBL)
+    (DEF_CHIP             137  DEF_CHIP)
+    (DEF_PAD              138  DEF_PAD )
+ )
+
+  techLayerPurposePriorities(
+    (PACKAGE_METALIZATION drawing)
+    (PACKAGE_LABEL        label)
+    (BONDWIRE             drawing)
+    (BOND_LABEL           label)
+    (DEF_CHIP             drawing)
+    (DEF_PAD              drawing)    
+  )
+
+  techDisplays(
+    (PACKAGE_METALIZATION  drawing PKG_MET  t t t t t)
+    (PACKAGE_LABEL         label   PKG_LBL  t t t t t)
+    (BONDWIRE              drawing BOND     t t t t t)
+    (BOND_LABEL            label   BOND_LBL t t t t t)
+    (DEF_CHIP              drawing DEF_CHIP t t t t t)
+    (DEF_PAD               drawing DEF_PAD  t t t t t)    
+  )
+)
