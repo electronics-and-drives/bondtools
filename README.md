@@ -104,6 +104,12 @@ When needed, create a corresponding menu item.
 Specify the parameters is in the GUI and create the bondwires 
 with *OK* or *Apply*.
 
+An example of the bonding diagram of a multi-design chip is shown in the
+screenshots shown below.
+
+  <img src="./figs/bond1.png" width="500">
+  <img src="./figs/bond2.png" width="500">
+  <img src="./figs/bond3.png" width="500">
 
 ## Packages
 
