@@ -97,7 +97,9 @@ The GUI of the tool can be invoked with
 ```
 
 The GUI is shown below
-  <img src="./figs/gui.png" width="400">
+
+  <img src="./figs/gui.png" width="200">
+
 
 When needed, create a corresponding menu item.
 Specify the parameters is in the GUI and create the bondwires 
