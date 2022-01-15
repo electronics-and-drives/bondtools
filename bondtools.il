@@ -33,8 +33,11 @@
 *=============================================================================*/
 
 
-(defun EDbondtoolsDrawWires (cv fBallRadius fWireDiameter "gnn")
-  (let (labels labelPairs)
+(defun EDbondtoolsDrawWires (cv fBallRadius fWireDiameter fWedgeExtention "gnnn")
+  (let (ballLabels wedgeLabels labelPairs)
+
+    ;for lint
+    fWedgeExtention
 
     (if 
       (and
@@ -45,18 +48,31 @@
     then
 
       (setq
-        labels 
-        (EDbondtoolsGetLabelsFromHierarchy cv)
+        ballLabels 
+        (EDbondtoolsGetLabelsFromHierarchy cv (list "BALL" "label"))
       );setq
 
+      (setq
+        wedgeLabels 
+        (EDbondtoolsGetLabelsFromHierarchy cv (list "WEDGE" "label"))
+      );setq
+      
       (setq labelPairs (makeTable "labelPairs" nil))
 
-      (foreach label labels
+      (foreach label ballLabels
         (unless (arrayref labelPairs (car label))
           (setarray labelPairs (car label) (tconc nil nil))
         );unless
 
-        (tconc (arrayref labelPairs (car label)) (cadr label))
+        (tconc (arrayref labelPairs (car label)) (list (cadr label) "BALL"))
+      );foreach
+
+      (foreach label wedgeLabels
+        (unless (arrayref labelPairs (car label))
+          (setarray labelPairs (car label) (tconc nil nil))
+        );unless
+
+        (tconc (arrayref labelPairs (car label)) (list (cadr label) "WEDGE"))
       );foreach
 
       (foreach label labelPairs~>?
@@ -91,48 +107,54 @@
     
       (foreach label labelPairs~>?
 
+        (when (equal (cadar (arrayref labelPairs label)) "BALL")
           (dbCreateEllipse 
             cv
             (list "BONDWIRE" "drawing")
+
             (list  
               (list
-                (difference (xCoord (car (arrayref labelPairs label))) fBallRadius)
-                (difference (yCoord (car (arrayref labelPairs label))) fBallRadius)
+                (difference (xCoord (caar (arrayref labelPairs label))) fBallRadius)
+                (difference (yCoord (caar (arrayref labelPairs label))) fBallRadius)
               );list
               (list
-                (plus (xCoord (car (arrayref labelPairs label))) fBallRadius)
-                (plus (yCoord (car (arrayref labelPairs label))) fBallRadius)
+                (plus (xCoord (caar (arrayref labelPairs label))) fBallRadius)
+                (plus (yCoord (caar (arrayref labelPairs label))) fBallRadius)
               );list
             );list
           );dbCreateEllipse
+        );when
 
+        (when (equal (cadadr (arrayref labelPairs label)) "BALL")
           (dbCreateEllipse 
             cv
             (list "BONDWIRE" "drawing")
+
             (list  
               (list
-                (difference (xCoord (cadr (arrayref labelPairs label))) fBallRadius)
-                (difference (yCoord (cadr (arrayref labelPairs label))) fBallRadius)
+                (difference (xCoord (caadr (arrayref labelPairs label))) fBallRadius)
+                (difference (yCoord (caadr (arrayref labelPairs label))) fBallRadius)
               );list
               (list
-                (plus (xCoord (cadr (arrayref labelPairs label))) fBallRadius)
-                (plus (yCoord (cadr (arrayref labelPairs label))) fBallRadius)
+                (plus (xCoord (caadr (arrayref labelPairs label))) fBallRadius)
+                (plus (yCoord (caadr (arrayref labelPairs label))) fBallRadius)
               );list
             );list
           );dbCreateEllipse
+        );when
 
-          (dbCreatePath
-            cv
-            (list "BONDWIRE" "drawing")
-            (list 
-              (car (arrayref labelPairs label))
-              (cadr (arrayref labelPairs label))
-            );list
-            fWireDiameter 
-          );dbCreatePath
+        (dbCreatePath
+          cv
+          (list "BONDWIRE" "drawing")
+          (list 
+            (caar  (arrayref labelPairs label))
+            (caadr (arrayref labelPairs label))
+          );list
+          fWireDiameter 
+        );dbCreatePath
       );foreach
 
-      t
+      labelPairs
     else
       (error "No editable cellview is provided")
       nil
@@ -140,14 +162,15 @@
   );let
 );defun EDbondtoolsDrawWires
 
-(defun EDbondtoolsGetLabelsFromHierarchy (dbobj)
+
+(defun EDbondtoolsGetLabelsFromHierarchy (dbobj layer)
 
   (let ((lAccumulator (tconc nil nil)) subLabels)
 
     (foreach shape dbobj~>shapes
       (when
         (and
-          (equal shape~>lpp (list "BOND_LABEL" "label"))
+          (equal shape~>lpp layer)
           (equal shape~>objType "label")
         );and 
         (tconc lAccumulator (list shape~>theLabel shape->xy))
@@ -156,7 +179,7 @@
 
     (foreach inst dbobj~>instances
 
-      (setq subLabels (EDbondtoolsGetLabelsFromHierarchy inst~>master))
+      (setq subLabels (EDbondtoolsGetLabelsFromHierarchy inst~>master layer))
 
       (when subLabels
         (lconc
@@ -174,3 +197,80 @@
     (cdar lAccumulator)
   );let
 );defun
+
+(defun EDbondtoolsDrawBondWiresCallback ()
+  (let (form)
+    (setq form (eval (quote EDdrawBondWires)))
+
+    (EDbondtoolsDrawWires
+      (geGetWindowCellView)
+      form~>ballRadius~>value
+      form~>bondDiameter~>value
+      form~>wedgeExtionsion~>value
+    );EDbondtoolsDrawWires
+  );let
+);defun
+
+(let (bondDiameter ballRadius wedgeExtionsion formLayout)
+  (setq
+    bondDiameter
+    (hiCreateFloatField
+      ?name (quote bondDiameter)
+      ?prompt "Bondwire Diameter"
+      ?value  25.0
+      ?range (list 0.01 "infinity")
+    );hiCreateFloatField
+  );setq
+
+  (setq
+    ballRadius
+    (hiCreateFloatField
+      ?name (quote ballRadius)
+      ?prompt "Ball Radius"
+      ?value  35.0
+      ?range (list 0.01 "infinity")
+    );hiCreateFloatField
+  );setq
+
+  (setq
+    wedgeExtionsion
+    (hiCreateFloatField
+      ?name (quote wedgeExtionsion)
+      ?prompt "Wedge Extension"
+      ?value  0.0
+      ?range (list 0.0 "infinity")
+      ?editable nil
+    );hiCreateFloatField
+  );setq
+
+  (setq
+    formLayout
+    (hiCreateFormLayout
+      (quote drawBondwireFormLayout)
+      ?frame "drawBondwireFormLayout"
+      ?items
+        (list
+          bondDiameter
+          ballRadius
+          wedgeExtionsion
+        );list
+    );hiCreateFormLayout
+  );setq
+
+  (hiCreateLayoutForm
+    (quote EDdrawBondWires)
+    "[ED] Draw Bondwires"
+    formLayout
+    ?sizePolicy 'horizontalExpanding
+    ?dialogStyle 'modeless
+    ?buttonLayout 'OKCancelApply
+    ?minSize 250:100
+    ?callback
+      (list
+        "(EDbondtoolsDrawBondWiresCallback)"
+        "nil"
+      );list
+    ?buttonDisabled (list 'Help)
+  );hiCreateLayoutForm
+);let
+
