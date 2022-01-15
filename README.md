@@ -43,19 +43,18 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 | BALL        | label       | position of the ball of a bondwire               |
 | WEDGE       | label       | position of the wedge of a bondwire              |
 | DEF_CHIP    | drawing     | outer edge of the chip                           |
-| DEF_PAD     | drawing     | bond pads (opening in passionating)              |
+| DEF_PAD     | drawing     | bond pads (opening in passivation)               |
 | DEF_MARK    | drawing     | markings                                         |
 
 
 ## Usage
 
 A bondwire can be defined by placing two labels with same name 
-in the layout viewer.
+in the VLE (Virtuoso Layout Editor).
 The first label must be placed on the bondpad and the second label must
 be placed on the leadframe.
 
-When a ball should be used utilize the layer *BALL*, *WEDGE* when a
-wedge is used.
+The endings of bond can be specified using the layer (*BALL* or *WEDGE*).
 
 ### SKILL
 
@@ -107,6 +106,8 @@ with *OK* or *Apply*.
 
 
 ## Packages
+
+The packages stated below are provided in the library *PACKAGES*.
 
 ### JLCC/CQFJ 
 
