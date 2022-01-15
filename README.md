@@ -2,8 +2,6 @@
 
 Toolbox for creating a bonding diagram in Cadence Virtuoso
 
-<span style="color:red">WORK IN PROGRESS</span>
-
 ## Setup
 
 1. Create the new library *PACKAGES* and reference(!) it on your *PDK* library.
@@ -48,9 +46,65 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 | DEF_PAD     | drawing     | bond pads (opening in passionating)              |
 | DEF_MARK    | drawing     | markings                                         |
 
-## Packages
 
-<span style="color:red">WORK IN PROGRESS</span> 
+## Usage
+
+A bondwire can be defined by placing two labels with same name 
+in the layout viewer.
+The first label must be placed on the bondpad and the second label must
+be placed on the leadframe.
+
+When a ball should be used utilize the layer *BALL*, *WEDGE* when a
+wedge is used.
+
+### SKILL
+
+The function *EDbondtoolsDrawWires* must be invoked in the Command Interpreter Window (CIW).
+
+``` scheme
+(EDbondtoolsDrawWires 
+  cv 
+  fBallRadius
+  fWireDiameter
+  fWedgeExtension
+) => t/nil
+```
+
+The parameters of the function are
+
+`cv`
+
+Cellview where the bondwires are created.
+
+`fBallRadius`
+
+Radius of a ball.
+
+`fWireDiameter`
+
+Diameter of the bondwire.
+
+`fWedgeExtention`
+
+Wedge Extension.
+
+### GUI
+
+The GUI of the tool can be invoked with
+
+``` scheme
+(hiDisplayForm (quote EDdrawBondWires))
+```
+
+The GUI is shown below
+  <img src="./figs/gui.png" width="400">
+
+When needed, create a corresponding menu item.
+Specify the parameters is in the GUI and create the bondwires 
+with *OK* or *Apply*.
+
+
+## Packages
 
 ### JLCC/CQFJ 
 
