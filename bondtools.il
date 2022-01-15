@@ -44,16 +44,19 @@
       );and
     then
 
-      (setq labels (setof shape cv~>shapes (equal shape~>objType "label")))
+      (setq
+        labels 
+        (EDbondtoolsGetLabelsFromHierarchy cv)
+      );setq
+
       (setq labelPairs (makeTable "labelPairs" nil))
 
       (foreach label labels
-        printf("Here\n")
-        (unless (arrayref labelPairs label~>theLabel)
-          (setarray labelPairs label~>theLabel (tconc nil nil))
+        (unless (arrayref labelPairs (car label))
+          (setarray labelPairs (car label) (tconc nil nil))
         );unless
 
-        (tconc (arrayref labelPairs label~>theLabel) label~>xy)
+        (tconc (arrayref labelPairs (car label)) (cadr label))
       );foreach
 
       (foreach label labelPairs~>?
@@ -136,3 +139,38 @@
     );if
   );let
 );defun EDbondtoolsDrawWires
+
+(defun EDbondtoolsGetLabelsFromHierarchy (dbobj)
+
+  (let ((lAccumulator (tconc nil nil)) subLabels)
+
+    (foreach shape dbobj~>shapes
+      (when
+        (and
+          (equal shape~>lpp (list "BOND_LABEL" "label"))
+          (equal shape~>objType "label")
+        );and 
+        (tconc lAccumulator (list shape~>theLabel shape->xy))
+      );when
+    );foreach
+
+    (foreach inst dbobj~>instances
+
+      (setq subLabels (EDbondtoolsGetLabelsFromHierarchy inst~>master))
+
+      (when subLabels
+        (lconc
+          lAccumulator
+          (foreach mapcar elem subLabels
+            (list
+              (car  elem)
+              (dbTransformPoint (cadr elem) inst~>transform)
+            );list
+          );foreach
+        );lconc
+      );when
+    );foreach
+
+    (cdar lAccumulator)
+  );let
+);defun
