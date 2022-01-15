@@ -37,16 +37,16 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 
 ## Layers
 
-| Layer       | Purpose     |
-| ----------- | ----------- |
-| PKG_MET     | drawing     |
-| PKG_LBL     | label       |
-| BONDWIRE    | drawing     |
-| BALL        | label       |
-| WEDGE       | label       |
-| DEF_CHIP    | drawing     |
-| DEF_PAD     | drawing     |
-| DEF_MARK    | drawing     |
+| Layer       | Purpose     | Description                                      |
+| ----------- | ----------- | ------------------------------------------------ |
+| PKG_MET     | drawing     | metalization in package                          |
+| PKG_LBL     | label       | labels for leadframe pins                        |
+| BONDWIRE    | drawing     | bondwire                                         |
+| BALL        | label       | position of the ball of a bondwire               |
+| WEDGE       | label       | position of the wedge of a bondwire              |
+| DEF_CHIP    | drawing     | outer edge of the chip                           |
+| DEF_PAD     | drawing     | bond pads (opening in passionating)              |
+| DEF_MARK    | drawing     | markings                                         |
 
 ## Packages
 
