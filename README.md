@@ -84,7 +84,7 @@ Radius of a ball.
 
 Diameter of the bondwire.
 
-`fWedgeExtention`
+`fWedgeExtension`
 
 Wedge Extension.
 
