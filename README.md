@@ -5,9 +5,10 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 
 ## Setup
 
-1. Create the new library *PACKAGES* and reference(!) it on your *PDK* library.
-2. Go in  the *CIW* to *Tools> Technology File Manager* and press the 
-   button *Load...* .
+1. Create the new library *PACKAGES* and reference(!) it on your *PDK* 
+   technology library.
+3. Go in  the *CIW* to *Tools > Technology File Manager* and press the 
+   button *Load...*.
    Follow the instructions from the screenshot and press *OK*.
 
     <img src="./figs/load-tech-file.png" width="400">
@@ -16,7 +17,7 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
    button *Save...* .
    Follow the instructions from the screenshot and press *OK*.
 
-    <img src="./figs/save-tech.png" width="400">
+    <img src="./figs/save-tech.png" width="300">
 
 4. Go in  the *CIW* to *Tools> Display Resource Manager* and press the
    *Merge...*.  Merge *packages.drf* with the Display Resource File *.drf* 
@@ -24,16 +25,15 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 
     <img src="./figs/merge-drf.png" width="400">
 
-5. Go to the *CIW* and enter the command
+5. Go to the *CIW* and load the file *packages.il* from the repository.
     ``` scheme
     (load "packages.il")
     ```
-5. Add the command
+5. Load the file *bondtools.il* from the repository in your *.cdsinit*.
     ``` scheme
     (load "bondtools.il")
     ```
-   to your *.cdsinit*.
-
+    
 ## Layers
 
 | Layer       | Purpose     | Description                                      |
