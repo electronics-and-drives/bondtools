@@ -124,6 +124,6 @@ JLCC   : J-Leaded Ceramic Chip Carrier
 CQFJ   : Ceramic Quad Flat J-Leaded
 
 | Cell Name         | Lead Count | Die Cavity (AxB) | Drawing Number  |
-| ----------------- | -----------|:----------------:| ---------------:|
+| ----------------- | ---------- | ---------------- | --------------- |
 | JLCC_44_PB_F86315 | 44         | 0.34x0.34        |  PB-F86315      |
 | JLCC_44_PB_F86315 | 68         | 0.4x0.4          |  PB-F86764      |
