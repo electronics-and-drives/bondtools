@@ -130,6 +130,7 @@ Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/p
 
 | Acronym           | Description                                     |
 | ----------------- | ----------------------------------------------- |
+| DIL               | Dual-in-line                                    |
 | CSOIC             | Ceramic Small Outline Integrated Circuit        |
 | CLCC              | C-Leadless Chip Carriers                        |
 | JLCC              | J-Leaded Ceramic Chip Carrier                   |
