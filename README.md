@@ -134,7 +134,7 @@ Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/p
 | CLCC              | C-Leadless Chip Carriers                        |
 | JLCC              | J-Leaded Ceramic Chip Carrier                   |
 | CPGA              | Ceramic Pin Grid Array                          |
-| SOIC              | Small Outline IC                                |
+| SOIC              | Small Outline Integrated Circuit                |
 | QFN               | Quad-Flat No-leads                              |
 | CSOP              | Ceramic Small Outline Package                   |
 | CDIP              | Ceramic Dual Inline Package                     |
