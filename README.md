@@ -120,10 +120,25 @@ The packages stated below are provided in the library *PACKAGES*.
 
 Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/pdf/kyocera-pkg-cqfj-e-inch_r0167d.pdf), [mm](https://global.kyocera.com/prdct/semicon/semi/std_pkg/pdf/kyocera-pkg-cqfj-e_r0167d.pdf))
 
-JLCC   : J-Leaded Ceramic Chip Carrier
-CQFJ   : Ceramic Quad Flat J-Leaded
 
 | Cell Name         | Lead Count | Die Cavity (AxB) | Drawing Number  |
 | ----------------- | ---------- | ---------------- | --------------- |
 | JLCC_44_PB_F86315 | 44         | 0.34x0.34        |  PB-F86315      |
 | JLCC_44_PB_F86315 | 68         | 0.4x0.4          |  PB-F86764      |
+
+## Acronyms
+
+| Acronym           | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| CSOIC             | Ceramic Small Outline Integrated Circuit        |
+| CLCC              | C-Leadless Chip Carriers                        |
+| JLCC              | J-Leaded Ceramic Chip Carrier                   |
+| CPGA              | Ceramic Pin Grid Array                          |
+| SOIC              | Small Outline IC                                |
+| QFN               | Quad-Flat No-leads                              |
+| CSOP              | Ceramic Small Outline Package                   |
+| CDIP              | Ceramic Dual Inline Package                     |
+| CQFP              | Ceramic Quad Flat Package                       |
+| CPGA              | Ceramic Pin Grid Array                          |
+| CQFN              | Ceramic Quad Flat Non-Leaded                    |
+| CQFJ              | Ceramic Quad Flat J-Leaded                      |
