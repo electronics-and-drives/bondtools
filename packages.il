@@ -349,7 +349,7 @@
 
     (setq 
       fDrawLead
-      (lambda (cv x x1 x2 pitch width grid idx num_of_pins labelSize)
+      (lambda (cv x x1 x2 pitch width grid idx num_of_pins labelSize labelOffset)
         (let (i lead y)
 
           (setq
@@ -454,7 +454,13 @@
               cv 
               label
               (centerBox lead~>bBox) 
-              (lsprintf "%L" idx) 
+              (lsprintf 
+                "%L" 
+                (if (geqp labelOffset 0)
+                  (add1 (mod (sub1 (plus idx labelOffset)) num_of_pins))
+                  (add1 (mod (sub1 (plus idx (difference num_of_pins (abs (mod labelOffset -num_of_pins))))) num_of_pins))
+                );if
+              );lsprintf
               "centerCenter"
               "R0"
               "roman"
@@ -475,9 +481,10 @@
         (times lead_pitch_in_inch inch_to_um scale)
         (times lead_width_in_inch inch_to_um scale)
         grid
-        (add idx labelOffset) 
+        idx
         pin_idx_u
         labelSize
+        labelOffset
       );funcall
     );for
   );let
@@ -800,7 +807,7 @@
 
     (setq 
       fDrawLead
-      (lambda (cv x x1 x2 pitch width grid idx num_of_pins labelSize)
+      (lambda (cv x x1 x2 pitch width grid idx num_of_pins labelSize labelOffset)
         (let (i lead y)
 
           (setq
@@ -905,7 +912,13 @@
               cv 
               label
               (centerBox lead~>bBox) 
-              (lsprintf "%L" idx) 
+              (lsprintf 
+                "%L" 
+                (if (geqp labelOffset 0)
+                  (add1 (mod (sub1 (plus idx labelOffset)) num_of_pins))
+                  (add1 (mod (sub1 (plus idx (difference num_of_pins (abs (mod labelOffset -num_of_pins))))) num_of_pins))
+                );if
+              );lsprintf
               "centerCenter"
               "R0"
               "roman"
@@ -926,9 +939,10 @@
         (times lead_pitch_in_inch inch_to_um scale)
         (times lead_width_in_inch inch_to_um scale)
         grid
-        (add idx labelOffset)
+        idx
         pin_idx_u
         labelSize
+        labelOffset
       );funcall
     );for
   );let
