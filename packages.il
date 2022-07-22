@@ -35,9 +35,10 @@
 (pcDefinePCell
  (list (ddGetObj "PACKAGES") "JLCC_44_PB_F86315" "layout")
  (
-    (scale     float   1.0)
-    (grid      float 0.025)
-    (labelSize float 150.0)
+    (scale       float   1.0)
+    (grid        float 0.025)
+    (labelSize   float 150.0)
+    (labelOffset int       0)
   )
 
   (let 
@@ -474,7 +475,7 @@
         (times lead_pitch_in_inch inch_to_um scale)
         (times lead_width_in_inch inch_to_um scale)
         grid
-        idx
+        (add idx labelOffset) 
         pin_idx_u
         labelSize
       );funcall
@@ -485,9 +486,10 @@
 (pcDefinePCell
  (list (ddGetObj "PACKAGES") "JLCC_68_PB_F86764" "layout")
  (
-    (scale     float   1.0)
-    (grid      float 0.025)
-    (labelSize float 150.0)
+    (scale       float   1.0)
+    (grid        float 0.025)
+    (labelSize   float 150.0)
+    (labelOffset int       0)
   )
 
   (let 
@@ -924,7 +926,7 @@
         (times lead_pitch_in_inch inch_to_um scale)
         (times lead_width_in_inch inch_to_um scale)
         grid
-        idx
+        (add idx labelOffset)
         pin_idx_u
         labelSize
       );funcall
