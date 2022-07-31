@@ -8,28 +8,43 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 1. Create the new library *PACKAGES* and reference(!) it on your *PDK* 
    technology library.
 3. Go in  the *CIW* to *Tools > Technology File Manager* and press the 
-   button *Load...*.
-   Follow the instructions from the screenshot and press *OK*.
+   button *Load...*. As a result, the *Load Technology File* form will
+   open. Reference the ASCII Technology file *packages.tf* from this repository
+   and *Merge* it with the library *PACKAGES* (see screenshot below).
+   Confirm with *OK*.
 
     <img src="./figs/load-tech-file.png" width="400">
 
 3. Go in  the *CIW* to *Tools> Technology File Manager* and press the 
-   button *Save...* .
-   Follow the instructions from the screenshot and press *OK*.
+   button *Save...* . As a result, the *Save Technology File* form will
+   open. Select the library *PACKAGES* and confirm with *OK*.
 
     <img src="./figs/save-tech.png" width="300">
 
 4. Go in  the *CIW* to *Tools> Display Resource Manager* and press the
-   *Merge...*.  Merge *packages.drf* with the Display Resource File *.drf* 
-   of your PDK.
+   *Merge...*.  As a result, the *Merge Display Resource Files(DRF)* form will
+   open. Choose the *.drf* from your PDK by clicking on the
+   corresponding elements in the *From Library* box 
+   (*gpdk045/display.drf* in the screenshot below).
+   This *.drf* file is added to the list *Merge DRF Files in sequence*.
+   As a second step, provide the file *packages.drf* from this repository
+   to the *From file* box and push the button *Add*.
+   
+   Provide the name of the merged *.drf* to the field *Destination DRF*
+   (*display_merged.drf*).
+   Make sure that this *.drf* is loaded at the startup of Virtuoso.
+   It is recommended to add the command ``drLoadDrf("display_merged.drf")``
+   to your ``.cdsinit``.
 
     <img src="./figs/merge-drf.png" width="400">
 
 5. Go to the *CIW* and load the file *packages.il* from the repository.
+   You must load this code only once.
+   Reloading is only needed when the packages are updated.
     ``` scheme
     (load "packages.il")
     ```
-5. Load the file *bondtools.il* from the repository in your *.cdsinit*.
+5. Load the file *bondtools.il* from the repository in your ``.cdsinit``.
     ``` scheme
     (load "bondtools.il")
     ```
