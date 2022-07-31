@@ -1,7 +1,10 @@
 # bondtools
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Toolbox for creating a bonding diagram in Cadence Virtuoso
+Toolbox for creating a bonding diagram in Cadence Virtuoso.
+
+This toolbox is used for creating bonding diagrams at
+[Electronics & Drives](https://www.electronics-and-drives.de/).
 
 ## Setup
 
