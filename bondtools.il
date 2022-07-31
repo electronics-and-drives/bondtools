@@ -32,7 +32,21 @@
 *
 *=============================================================================*/
 
-
+;FUNCTION
+; EDbondtoolsDrawWires
+;
+;Description:
+; Draw bondwires in a layout cellview
+;
+;Parameters:
+; cv               dbobj, cellview where the bonding diagram is created
+; fBallRadius      float, radius of the ball in *du*
+; fWireDiameter    float, diameter of bondwire in *du*
+; fWedgeExtention  float, extension of the wedge in *du*
+;
+;Return:
+; retval           bool, 't' when successful, 'nil' otherwise
+;
 (defun EDbondtoolsDrawWires (cv fBallRadius fWireDiameter fWedgeExtention "gnnn")
   (let (ballLabels wedgeLabels labelPairs)
 
@@ -162,7 +176,19 @@
   );let
 );defun EDbondtoolsDrawWires
 
-
+;FUNCTION
+; EDbondtoolsGetLabelsFromHierarchy
+;
+;Description:
+; Get the position of the bondtools labels hierarchically
+;
+;Parameters:
+; dbobj            dbobj, database object to be searched for labels
+; layer            lpp, layer purpose pair of label
+;
+;Return:
+; labels           list, list of labels
+;
 (defun EDbondtoolsGetLabelsFromHierarchy (dbobj layer)
 
   (let ((lAccumulator (tconc nil nil)) subLabels)
@@ -198,6 +224,16 @@
   );let
 );defun
 
+;FUNCTION
+; EDbondtoolsDrawBondWiresCallback
+;
+;Description:
+; Callback that is triggered when the button *OK* or *Apply*
+; is pushed in the GUI
+;
+;Return:
+; t             bool, always 't'
+;
 (defun EDbondtoolsDrawBondWiresCallback ()
   (let (form)
     (setq form (eval (quote EDdrawBondWires)))
@@ -208,6 +244,7 @@
       form~>bondDiameter~>value
       form~>wedgeExtionsion~>value
     );EDbondtoolsDrawWires
+    t
   );let
 );defun
 
@@ -274,7 +311,15 @@
   );hiCreateLayoutForm
 );let
 
-
+;FUNCTION
+; EDBondtoolsCreateLayoutPulldownMenu
+;
+;Description:
+; This function creates a pulldown menu
+;
+;Return:
+; pulldown menu
+;
 (defun EDBondtoolsCreateLayoutPulldownMenu () 
   (hiCreatePulldownMenu
     (quote EDbondtoolsPulldownMenu) 
@@ -289,6 +334,15 @@
   );hiCreatePulldownMenu 
 );defun 
 
+;FUNCTION
+; EDBondtoolsMenuBarPostInstallTrigger
+;
+;Description:
+; This function is a trigger which added the Bondtools menu item to the VLE
+;
+;Return:
+; t             bool, always 't'
+;
 (defun EDBondtoolsMenuBarPostInstallTrigger (args) 
   (when 
     (not
@@ -307,8 +361,10 @@
       (length (hiGetBannerMenus args->window)) 
     );hiInsertBannerMenu
   );when
+  t
 );defun
 
+;Trigger for Layout-L
 (deRegUserTriggers
   "maskLayout"
   nil
@@ -316,6 +372,7 @@
   (quote EDBondtoolsMenuBarPostInstallTrigger)
 );deRegUserTriggers
 
+;Trigger for Layout-XL
 (deRegUserTriggers
   "maskLayoutXL"
   nil
@@ -323,6 +380,7 @@
   (quote EDBondtoolsMenuBarPostInstallTrigger)
 );deRegUserTriggers
 
+;Trigger for Layout-GXL
 (deRegUserTriggers
   "maskLayoutGXL"
   nil
