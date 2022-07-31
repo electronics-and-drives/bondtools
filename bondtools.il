@@ -274,3 +274,58 @@
   );hiCreateLayoutForm
 );let
 
+
+(defun EDBondtoolsCreateLayoutPulldownMenu () 
+  (hiCreatePulldownMenu
+    (quote EDbondtoolsPulldownMenu) 
+    "E&&D" 
+    (list 
+      (hiCreateMenuItem
+        ?name (quote EDBondtoolsMenuItem)
+        ?itemText "Draw Bondwires"
+        ?callback "(hiDisplayForm (quote EDdrawBondWires))" 
+      );hiCreateMenuItem
+    );list
+  );hiCreatePulldownMenu 
+);defun 
+
+(defun EDBondtoolsMenuBarPostInstallTrigger (args) 
+  (when 
+    (not
+      (rexMatchList
+        "EDbondtoolsPulldownMenu"
+        (hiGetBannerMenus args->window)
+      );rexMatchList
+    );not
+
+    (hiInsertBannerMenu
+      args->window 
+      (if (boundp (quote EDbondtoolsPulldownMenu))
+        EDbondtoolsPulldownMenu
+        (EDBondtoolsCreateLayoutPulldownMenu)
+      );if
+      (length (hiGetBannerMenus args->window)) 
+    );hiInsertBannerMenu
+  );when
+);defun
+
+(deRegUserTriggers
+  "maskLayout"
+  nil
+  nil
+  (quote EDBondtoolsMenuBarPostInstallTrigger)
+);deRegUserTriggers
+
+(deRegUserTriggers
+  "maskLayoutXL"
+  nil
+  nil
+  (quote EDBondtoolsMenuBarPostInstallTrigger)
+);deRegUserTriggers
+
+(deRegUserTriggers
+  "maskLayoutGXL"
+  nil
+  nil
+  (quote EDBondtoolsMenuBarPostInstallTrigger)
+);deRegUserTriggers

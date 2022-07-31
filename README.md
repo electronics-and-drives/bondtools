@@ -62,7 +62,6 @@ Toolbox for creating a bonding diagram in Cadence Virtuoso
 | DEF_PAD     | drawing     | bond pads (opening in passivation)               |
 | DEF_MARK    | drawing     | markings                                         |
 
-
 ## Usage
 
 A bondwire can be defined by placing two labels with same name 
@@ -74,7 +73,8 @@ The endings of bond can be specified using the layer (*BALL* or *WEDGE*).
 
 ### SKILL
 
-The function *EDbondtoolsDrawWires* must be invoked in the Command Interpreter Window (CIW).
+The function *EDbondtoolsDrawWires* must be invoked in the 
+Command Interpreter Window (CIW).
 
 ``` scheme
 (EDbondtoolsDrawWires 
@@ -105,18 +105,12 @@ Wedge Extension.
 
 ### GUI
 
-The GUI of the tool can be invoked with
-
-``` scheme
-(hiDisplayForm (quote EDdrawBondWires))
-```
-
-The GUI is shown below
+The GUI of the tool can be invoked from the menu bar of the VLE.
+Go to the element *E&D* and click on *Draw Bondwires*.
+As a result, a GUI is shown:
 
   <img src="./figs/gui.png" width="200">
 
-
-When needed, create a corresponding menu item.
 Specify the parameters is in the GUI and create the bondwires 
 with *OK* or *Apply*.
 
