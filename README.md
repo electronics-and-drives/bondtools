@@ -101,7 +101,7 @@ Diameter of the bondwire.
 
 `fWedgeExtension`
 
-Wedge Extension.
+Wedge extension.
 
 ### GUI
 
