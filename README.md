@@ -93,6 +93,8 @@ The parameters of the function are
 `cv`
 
 Cellview where the bondwires are created.
+You can reference the cellview in the foreground window with
+``(geGetWindowCellView)`` or ``(gwc)``.
 
 `fBallRadius`
 
@@ -113,6 +115,9 @@ Go to the element *E&D* and click on *Draw Bondwires*.
 As a result, a GUI is shown:
 
   <img src="./figs/gui.png" width="200">
+
+Another way to open the GUI is to execute the 
+command ``(hiDisplayForm (quote EDdrawBondWires))`` in the CIW.
 
 Specify the parameters is in the GUI and create the bondwires 
 with *OK* or *Apply*.
