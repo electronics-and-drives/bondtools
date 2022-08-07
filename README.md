@@ -128,6 +128,14 @@ screenshots below.
   <img src="./figs/bond1.png" width="500">
   <img src="./figs/bond2.png" width="500">
   <img src="./figs/bond3.png" width="500">
+  
+## Export
+
+You can export the bondplan as *GDS2* using the provided *strmInOut.layermap*.
+
+Another options is to export a *tikzpicture* with 
+[ml2TikZ](https://github.com/electronics-and-drives/ml2tikz).
+Use the file *layers.tex* for this purpose.
 
 ## Packages
 
