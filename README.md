@@ -141,7 +141,7 @@ Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/p
 | Cell Name         | Lead Count | Die Cavity (AxB) | Drawing Number  |
 | ----------------- | ---------- | ---------------- | --------------- |
 | JLCC_44_PB_F86315 | 44         | 0.34x0.34        |  PB-F86315      |
-| JLCC_44_PB_F86315 | 68         | 0.4x0.4          |  PB-F86764      |
+| JLCC_68_PB_F86764 | 68         | 0.4x0.4          |  PB-F86764      |
 
 ## Acronyms
 
