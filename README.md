@@ -85,6 +85,7 @@ Command Interpreter Window (CIW).
   fBallRadius
   fWireDiameter
   fWedgeExtension
+  sLogfile
 ) => t/nil
 ```
 
@@ -108,16 +109,20 @@ Diameter of the bondwire.
 
 Wedge extension.
 
+`sLogfile`
+
+Path to the logfile. No logfile is created when ``nil`` is provided
+
 ### GUI
 
 The GUI of the tool can be invoked from the menu bar of the VLE.
-Go to the element *E&D* and click on *Draw Bondwires*.
+Go to the element *Bondtools* and click on *Draw Bondwires*.
 As a result, a GUI is shown:
 
   <img src="./figs/gui.png" width="200">
 
 Another way to open the GUI is to execute the 
-command ``(hiDisplayForm (quote EDdrawBondWires))`` in the CIW.
+command ``(EDbondtoolsOpenUserInterface`` in the CIW.
 
 Specify the parameters is in the GUI and create the bondwires 
 with *OK* or *Apply*.
@@ -153,25 +158,25 @@ Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/p
 
 ## Acronyms
 
-| Acronym           | Description                                     |
-| ----------------- | ----------------------------------------------- |
-| DIL               | Dual-in-line                                    |
-| CSOIC             | Ceramic Small Outline Integrated Circuit        |
-| CLCC              | C-Leadless Chip Carriers                        |
-| JLCC              | J-Leaded Ceramic Chip Carrier                   |
-| CPGA              | Ceramic Pin Grid Array                          |
-| SOIC              | Small Outline Integrated Circuit                |
-| QFN               | Quad-Flat No-leads                              |
-| CSOP              | Ceramic Small Outline Package                   |
-| CDIP              | Ceramic Dual Inline Package                     |
-| CQFP              | Ceramic Quad Flat Package                       |
-| CPGA              | Ceramic Pin Grid Array                          |
-| CQFN              | Ceramic Quad Flat Non-Leaded                    |
-| CQFJ              | Ceramic Quad Flat J-Leaded                      |
+| Acronym           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| DIL               | Dual-in-line                                 |
+| CSOIC             | Ceramic Small Outline Integrated Circuit     |
+| CLCC              | C-Leadless Chip Carriers                     |
+| JLCC              | J-Leaded Ceramic Chip Carrier                |
+| CPGA              | Ceramic Pin Grid Array                       |
+| SOIC              | Small Outline Integrated Circuit             |
+| QFN               | Quad-Flat No-leads                           |
+| CSOP              | Ceramic Small Outline Package                |
+| CDIP              | Ceramic Dual Inline Package                  |
+| CQFP              | Ceramic Quad Flat Package                    |
+| CPGA              | Ceramic Pin Grid Array                       |
+| CQFN              | Ceramic Quad Flat Non-Leaded                 |
+| CQFJ              | Ceramic Quad Flat J-Leaded                   |
 
 ## License
 
-Copyright (c) 2022 [Electronics & Drives](https://www.electronics-and-drives.de/) 
+Copyright (c) 2022 [Reutlingen University](https://www.reutlingen-university.de), [Electronics & Drives](https://www.electronics-and-drives.de) 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

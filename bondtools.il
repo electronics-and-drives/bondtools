@@ -1,16 +1,26 @@
 /*=============================================================================*
 *
-*   bondtools.il
+*   bondtools
 *
-*   Purpose:  Routing Bondwires in IC-Packages
-*   Language: Cadence SKILL
 *
-*   Lint: IQ score is 100 (best is 100) {sklint ?file "bondtools.il"}
+*   Purpose  : Routing Bondwires in IC-Packages
+*   Authors  : Matthias Schweikardt
 *
-*   Author:   Matthias Schweikardt
-*             (matthias.schweikardt@reutlingen-university.de)
+*   Language : Cadence Skill
+*   Lint     : IQ score is 99 (best is 100) {sklint ?file "bondtools.il"}
+*  
+*   Globals  :
+*    - Functions :
+*       o EDbondtoolsDrawWires
+*       o EDbondtoolsGetLabelsFromHierarchy
+*       o EDbondtoolsOpenUserInterface
+*       o EDbondtoolsDrawBondWiresCallback
+*       o EDbondtoolsEnableLogfileCallback
+*       o EDBondtoolsCreateLayoutPulldownMenu
+*       o EDBondtoolsMenuBarPostInstallTrigger
+*    - Symbols   : none
 *
-*   Copyright 2021 Reutlingen University, Electronics & Drives (Germany)
+*   Copyright 2022 Reutlingen University, Electronics & Drives (Germany)
 *
 *   Permission is hereby granted, free of charge, to any person obtaining a 
 *   copy of this software and associated documentation files (the "Software"), 
@@ -32,6 +42,7 @@
 *
 *=============================================================================*/
 
+
 ;FUNCTION
 ; EDbondtoolsDrawWires
 ;
@@ -39,16 +50,18 @@
 ; Draw bondwires in a layout cellview
 ;
 ;Parameters:
-; cv               dbobj, cellview where the bonding diagram is created
-; fBallRadius      float, radius of the ball in *du*
-; fWireDiameter    float, diameter of bondwire in *du*
-; fWedgeExtention  float, extension of the wedge in *du*
+; cv               dbobj,  cellview where the bonding diagram is created
+; fBallRadius      float,  radius of the ball in *du*
+; fWireDiameter    float,  diameter of bondwire in *du*
+; fWedgeExtention  float,  extension of the wedge in *du*
+; sLogfile         string, path to logfile (provide nil when no logfile is cretaed)
 ;
 ;Return:
 ; retval           bool, 't' when successful, 'nil' otherwise
 ;
-(defun EDbondtoolsDrawWires (cv fBallRadius fWireDiameter fWedgeExtention "gnnn")
-  (let (ballLabels wedgeLabels labelPairs)
+(defun EDbondtoolsDrawWires (cv fBallRadius fWireDiameter 
+                               fWedgeExtention sLogfile "gnnng")
+  (let (ballLabels wedgeLabels labelPairs (port nil))
 
     ;for lint
     fWedgeExtention
@@ -60,6 +73,11 @@
         (equal cv~>mode "a")
       );and
     then
+
+      (when (stringp sLogfile)
+        (setq port (outfile sLogfile "w"))
+        (fprintf port "type1,type2,x1,y1,x2,y2")
+      );when
 
       (setq
         ballLabels 
@@ -121,7 +139,7 @@
     
       (foreach label labelPairs~>?
 
-        (when (equal (cadar (arrayref labelPairs label)) "BALL")
+        (if (equal (cadar (arrayref labelPairs label)) "BALL") then
           (dbCreateEllipse 
             cv
             (list "BONDWIRE" "drawing")
@@ -137,9 +155,23 @@
               );list
             );list
           );dbCreateEllipse
-        );when
 
-        (when (equal (cadadr (arrayref labelPairs label)) "BALL")
+          (when (portp port)
+            (fprintf
+              port
+              "\nball"
+            );fprintf
+          );when
+        else
+          (when (portp port)
+            (fprintf
+              port
+              "\nwedge"
+            );fprintf
+          );when
+        );if
+
+        (if (equal (cadadr (arrayref labelPairs label)) "BALL") then
           (dbCreateEllipse 
             cv
             (list "BONDWIRE" "drawing")
@@ -155,6 +187,20 @@
               );list
             );list
           );dbCreateEllipse
+
+          (when (portp port)
+            (fprintf
+              port
+              ",ball"
+            );fprintf
+          );when
+        else
+          (when (portp port)
+            (fprintf
+              port
+              ",wedge"
+            );fprintf
+          );when
         );when
 
         (dbCreatePath
@@ -166,7 +212,22 @@
           );list
           fWireDiameter 
         );dbCreatePath
+
+        (when (portp port)
+          (fprintf
+            port
+            ",%L,%L,%L,%L"
+             (xCoord (caar  (arrayref labelPairs label)))
+             (yCoord (caar  (arrayref labelPairs label)))
+             (xCoord (caadr (arrayref labelPairs label))) 
+             (yCoord (caadr (arrayref labelPairs label)))
+          );fprintf
+        );when
       );foreach
+
+      (when (portp port)
+        (close port)
+      );when
 
       labelPairs
     else
@@ -175,6 +236,7 @@
     );if
   );let
 );defun EDbondtoolsDrawWires
+
 
 ;FUNCTION
 ; EDbondtoolsGetLabelsFromHierarchy
@@ -224,6 +286,49 @@
   );let
 );defun
 
+
+;FUNCTION
+; EDbondtoolsOpenUserInterface
+;
+;Description:
+; This function open the user interface of the software bondtools
+;
+;Return:
+; always 't'
+;
+(defun EDbondtoolsOpenUserInterface ()
+  (let (form cv (logfile "./bondtools.log"))
+
+    (setq form (eval (quote EDdrawBondWires)))
+
+    (when
+      (and
+        (setq cv (geGetWindowCellView))
+        (equal cv~>cellViewType "maskLayout")
+      );and
+
+      (setq
+        logfile
+        (lsprintf
+          "./bondtools_%s_%s_%s.log"
+          cv~>libName
+          cv~>cellName
+          cv~>viewName                    
+        );lsprintf
+      );setq
+    );when
+
+    (putpropq 
+      form~>logfile
+      logfile 
+      value
+    );putpropq
+
+    (hiDisplayForm (quote EDdrawBondWires))
+  );let
+);defun
+
+
 ;FUNCTION
 ; EDbondtoolsDrawBondWiresCallback
 ;
@@ -235,20 +340,69 @@
 ; t             bool, always 't'
 ;
 (defun EDbondtoolsDrawBondWiresCallback ()
-  (let (form)
+  (let (form cv)
+
     (setq form (eval (quote EDdrawBondWires)))
 
-    (EDbondtoolsDrawWires
-      (geGetWindowCellView)
-      form~>ballRadius~>value
-      form~>bondDiameter~>value
-      form~>wedgeExtionsion~>value
-    );EDbondtoolsDrawWires
+    (if 
+      (and
+        (setq cv (geGetWindowCellView))
+        (equal cv~>cellViewType "maskLayout")
+        (or
+          (equal cv~>mode "w")
+          (equal cv~>mode "a")
+        );or
+      );and
+    then
+      (EDbondtoolsDrawWires
+        cv
+        form~>ballRadius~>value
+        form~>bondDiameter~>value
+        form~>wedgeExtionsion~>value
+        (when form~>enableLogfile~>value
+          form~>logfile~>value
+        );when
+      );EDbondtoolsDrawWires
+
+      (when form~>enableLogfile~>value
+        (hiViewTextFile form~>logfile~>value)
+      );when
+    else
+      (error "No editable layout cellview available")
+    );if
+
     t
   );let
 );defun
 
-(let (bondDiameter ballRadius wedgeExtionsion formLayout)
+
+;FUNCTION
+; EDbondtoolsEnableLogfileCallback
+;
+;Description:
+; Callback that is triggered when the boolean button "Enable Logfile"
+; is pushed in the Draw Bondwire form
+;
+;Return:
+; t             bool, always 't'
+;
+(defun EDbondtoolsEnableLogfileCallback ()
+  (let (form)
+
+    (setq form (eval (quote EDdrawBondWires)))
+
+    (putpropq 
+      form~>logfile
+      form~>enableLogfile~>value 
+      enabled 
+    );putpropq
+
+    t
+  );let
+);defun EDbondtoolsEnableLogfileCallback
+
+
+(let (bondDiameter ballRadius wedgeExtionsion enableLogfile logfile formLayout)
   (setq
     bondDiameter
     (hiCreateFloatField
@@ -280,6 +434,27 @@
     );hiCreateFloatField
   );setq
 
+  (setq 
+    enableLogfile
+    (hiCreateBooleanButton
+      ?name (quote enableLogfile)
+      ?buttonText "Enable Logfile"
+      ?defValue nil
+      ?callback "(EDbondtoolsEnableLogfileCallback)"
+    );hiCreateBooleanButton
+  );setq
+
+  (setq 
+    logfile
+    (hiCreateFileSelectorField
+      ?name (quote logfile)
+      ?mode (quote anyFile)
+      ?prompt "Logfile"
+      ?enabled nil
+      ?value ""
+    );hiCreateFileSelectorField
+  );setq
+
   (setq
     formLayout
     (hiCreateFormLayout
@@ -290,6 +465,8 @@
           bondDiameter
           ballRadius
           wedgeExtionsion
+          enableLogfile
+          logfile
         );list
     );hiCreateFormLayout
   );setq
@@ -298,18 +475,25 @@
     (quote EDdrawBondWires)
     "[ED] Draw Bondwires"
     formLayout
-    ?sizePolicy 'horizontalExpanding
-    ?dialogStyle 'modeless
-    ?buttonLayout 'OKCancelApply
-    ?minSize 250:100
+    ?sizePolicy (quote horizontalExpanding)
+    ?dialogStyle (quote modeless)
+    ?buttonLayout (quote OKCancelApply)
+    ?minSize 300:100
     ?callback
       (list
         "(EDbondtoolsDrawBondWiresCallback)"
         "nil"
       );list
-    ?buttonDisabled (list 'Help)
+    ;?buttonDisabled (list 'Help)
   );hiCreateLayoutForm
+
+  (putpropq
+    (quote EDdrawBondWires)
+    "(hiLaunchBrowser \"https://github.com/matthschw/bondtools\")"
+    hiHelpAction
+  );putpropq
 );let
+
 
 ;FUNCTION
 ; EDBondtoolsCreateLayoutPulldownMenu
@@ -320,19 +504,20 @@
 ;Return:
 ; pulldown menu
 ;
-(defun EDBondtoolsCreateLayoutPulldownMenu () 
+(defun EDBondtoolsCreateLayoutPulldownMenu ()
   (hiCreatePulldownMenu
     (quote EDbondtoolsPulldownMenu) 
-    "E&&D" 
+    "Bondtools" 
     (list 
       (hiCreateMenuItem
         ?name (quote EDBondtoolsMenuItem)
         ?itemText "Draw Bondwires"
-        ?callback "(hiDisplayForm (quote EDdrawBondWires))" 
+        ?callback "(EDbondtoolsOpenUserInterface)" 
       );hiCreateMenuItem
     );list
   );hiCreatePulldownMenu 
 );defun 
+
 
 ;FUNCTION
 ; EDBondtoolsMenuBarPostInstallTrigger
@@ -355,7 +540,7 @@
     (hiInsertBannerMenu
       args->window 
       (if (boundp (quote EDbondtoolsPulldownMenu))
-        EDbondtoolsPulldownMenu
+        (eval EDbondtoolsPulldownMenu)
         (EDBondtoolsCreateLayoutPulldownMenu)
       );if
       (length (hiGetBannerMenus args->window)) 
@@ -363,6 +548,7 @@
   );when
   t
 );defun
+
 
 ;Trigger for Layout-L
 (deRegUserTriggers
