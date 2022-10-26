@@ -73,7 +73,7 @@ This toolbox is used for creating bonding diagrams at
 ## Usage
 
 A bondwire can be defined by placing two labels with same name 
-in the VLE (Virtuoso Layout Editor).
+in the VLS (Virtuoso Layout Suite).
 The first label must be placed on the bondpad and the second label must
 be placed on the leadframe.
 
@@ -120,7 +120,7 @@ Path to the logfile. No logfile is created when ``nil`` is provided
 
 ### GUI
 
-The GUI of the tool can be invoked from the menu bar of the VLE.
+The GUI of the tool can be invoked from the menu bar of the VLS.
 Go to the element *Bondtools* and click on *Draw Bondwires*.
 As a result, a GUI is shown:
 
