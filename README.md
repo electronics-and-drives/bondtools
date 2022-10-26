@@ -51,6 +51,11 @@ This toolbox is used for creating bonding diagrams at
     ``` scheme
     (load "bondtools.il")
     ```
+   You can create a menu item in the layout editor with
+    ``` scheme
+    (load "bondtoolsMenu.il")
+    ```
+
     
 ## Layers
 

@@ -7,7 +7,7 @@
 *   Authors  : Matthias Schweikardt
 *
 *   Language : Cadence Skill
-*   Lint     : IQ score is 99 (best is 100) {sklint ?file "bondtools.il"}
+*   Lint     : IQ score is 100 (best is 100) {sklint ?file "bondtools.il"}
 *  
 *   Globals  :
 *    - Functions :
@@ -16,8 +16,6 @@
 *       o EDbondtoolsOpenUserInterface
 *       o EDbondtoolsDrawBondWiresCallback
 *       o EDbondtoolsEnableLogfileCallback
-*       o EDBondtoolsCreateLayoutPulldownMenu
-*       o EDBondtoolsMenuBarPostInstallTrigger
 *    - Symbols   : none
 *
 *   Copyright 2022 Reutlingen University, Electronics & Drives (Germany)
@@ -493,83 +491,3 @@
     hiHelpAction
   );putpropq
 );let
-
-
-;FUNCTION
-; EDBondtoolsCreateLayoutPulldownMenu
-;
-;Description:
-; This function creates a pulldown menu
-;
-;Return:
-; pulldown menu
-;
-(defun EDBondtoolsCreateLayoutPulldownMenu ()
-  (hiCreatePulldownMenu
-    (quote EDbondtoolsPulldownMenu) 
-    "Bondtools" 
-    (list 
-      (hiCreateMenuItem
-        ?name (quote EDBondtoolsMenuItem)
-        ?itemText "Draw Bondwires"
-        ?callback "(EDbondtoolsOpenUserInterface)" 
-      );hiCreateMenuItem
-    );list
-  );hiCreatePulldownMenu 
-);defun 
-
-
-;FUNCTION
-; EDBondtoolsMenuBarPostInstallTrigger
-;
-;Description:
-; This function is a trigger which added the Bondtools menu item to the VLE
-;
-;Return:
-; t             bool, always 't'
-;
-(defun EDBondtoolsMenuBarPostInstallTrigger (args) 
-  (when 
-    (not
-      (rexMatchList
-        "EDbondtoolsPulldownMenu"
-        (hiGetBannerMenus args->window)
-      );rexMatchList
-    );not
-
-    (hiInsertBannerMenu
-      args->window 
-      (if (boundp (quote EDbondtoolsPulldownMenu))
-        (eval EDbondtoolsPulldownMenu)
-        (EDBondtoolsCreateLayoutPulldownMenu)
-      );if
-      (length (hiGetBannerMenus args->window)) 
-    );hiInsertBannerMenu
-  );when
-  t
-);defun
-
-
-;Trigger for Layout-L
-(deRegUserTriggers
-  "maskLayout"
-  nil
-  nil
-  (quote EDBondtoolsMenuBarPostInstallTrigger)
-);deRegUserTriggers
-
-;Trigger for Layout-XL
-(deRegUserTriggers
-  "maskLayoutXL"
-  nil
-  nil
-  (quote EDBondtoolsMenuBarPostInstallTrigger)
-);deRegUserTriggers
-
-;Trigger for Layout-GXL
-(deRegUserTriggers
-  "maskLayoutGXL"
-  nil
-  nil
-  (quote EDBondtoolsMenuBarPostInstallTrigger)
-);deRegUserTriggers
