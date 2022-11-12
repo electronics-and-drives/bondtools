@@ -21,9 +21,10 @@ This toolbox is used for creating bonding diagrams at
 
     <img src="./figs/load-tech-file.png" width="400">
 
-3. Go in  the *CIW* to *Tools> Technology File Manager* and press the 
-   button *Save...* . As a result, the *Save Technology File* form will
-   open. Select the library *PACKAGES* and confirm with *OK*.
+3. Go in  the *CIW* to *Tools> Technology File Manager*, select the library 
+   *PACKAGES* and press the button *Save...* . As a result, 
+   the *Save Technology File* form will open. 
+   Select the library *PACKAGES* and confirm with *OK*.
 
     <img src="./figs/save-tech.png" width="300">
 
