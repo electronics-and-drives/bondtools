@@ -10,6 +10,9 @@ This toolbox is used for creating bonding diagrams at
 
 1. Create the new library *PACKAGES* and reference(!) it on your *PDK* 
    technology library.
+
+    <img src="./figs/reference.png" width="300">
+
 3. Go in  the *CIW* to *Tools > Technology File Manager* and press the 
    button *Load...*. As a result, the *Load Technology File* form will
    open. Reference the ASCII Technology file *packages.tf* from this repository
