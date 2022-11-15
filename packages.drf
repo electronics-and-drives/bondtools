@@ -7,7 +7,7 @@
 *   Author:     Matthias Schweikardt
 *   Email:      matthias.schweikardt@reutlingen-university.de
 *
-*   Copyright 2021 Reutlingen University, Electronics & Drives (Germany)
+*   Copyright 2022 Reutlingen University, Electronics & Drives (Germany)
 *
 *   Permission is hereby granted, free of charge, to any person obtaining a 
 *   copy of this software and associated documentation files (the "Software"), 
