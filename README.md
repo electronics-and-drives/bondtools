@@ -62,6 +62,8 @@ This toolbox is used for creating bonding diagrams at
 
 ## Layers
 
+The following layers are defined by this toolbox:
+
 | Layer       | Purpose     | Description                                      |
 | ----------- | ----------- | ------------------------------------------------ |
 | PKG_MET     | drawing     | metalization in package                          |
@@ -71,7 +73,7 @@ This toolbox is used for creating bonding diagrams at
 | WEDGE       | label       | position of the wedge of a bondwire              |
 | DEF_CHIP    | drawing     | outer edge of the chip                           |
 | DEF_PAD     | drawing     | bond pads (opening in passivation)               |
-| DEF_MARK    | drawing     | markings                                         |
+| DEF_MARK    | drawing     | markings (noticeable layout structures)          |
 
 
 ## Usage
