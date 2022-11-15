@@ -60,7 +60,6 @@ This toolbox is used for creating bonding diagrams at
     (load "bondtoolsMenu.il")
     ```
 
-    
 ## Layers
 
 | Layer       | Purpose     | Description                                      |
@@ -74,19 +73,21 @@ This toolbox is used for creating bonding diagrams at
 | DEF_PAD     | drawing     | bond pads (opening in passivation)               |
 | DEF_MARK    | drawing     | markings                                         |
 
+
 ## Usage
 
 A bondwire can be defined by placing two labels with same name 
 in the VLS (Virtuoso Layout Suite).
 The first label must be placed on the bondpad and the second label must
-be placed on the leadframe.
+be placed on the lead.
 
-The endings of bond can be specified using the layer (*BALL* or *WEDGE*).
+The ending type of bond can be specified using the 
+layer (*BALL label* or *WEDGE label*).
 
 ### SKILL
 
 The function *EDbondtoolsDrawWires* must be invoked in the 
-Command Interpreter Window (CIW).
+Command Interpreter Window (CIW) to draw the bondwires.
 
 ``` scheme
 (EDbondtoolsDrawWires 
@@ -131,9 +132,9 @@ As a result, a GUI is shown:
   <img src="./figs/gui.png" width="200">
 
 Another way to open the GUI is to execute the 
-command ``(EDbondtoolsOpenUserInterface`` in the CIW.
+command ``(EDbondtoolsOpenUserInterface)`` in the CIW.
 
-Specify the parameters is in the GUI and create the bondwires 
+Specify the parameters in the GUI and create the bondwires 
 with *OK* or *Apply*.
 
 An example of the bonding diagram of a multi-design chip is shown in the
