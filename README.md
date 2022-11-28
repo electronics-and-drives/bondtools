@@ -64,17 +64,17 @@ This toolbox is used for creating bonding diagrams at
 
 The following layers are defined by this toolbox:
 
-| Layer       | Purpose     | Description                                      |
-| ----------- | ----------- | ------------------------------------------------ |
-| PKG_MET     | drawing     | metalization in package                          |
-| PKG_LBL     | label       | labels for leadframe pins                        |
-| BONDWIRE    | drawing     | bondwire                                         |
-| BALL        | label       | position of the ball of a bondwire               |
-| WEDGE       | label       | position of the wedge of a bondwire              |
-| DEF_CHIP    | drawing     | outer edge of the chip                           |
-| DEF_PAD     | drawing     | bond pads (opening in passivation)               |
-| DEF_MARK    | drawing     | markings (noticeable layout structures)          |
-
+| Layer       | Purpose     | Description                              |
+| ----------- | ----------- | ---------------------------------------- |
+| PKG_MET     | drawing     | metalization in package                  |
+| PKG_LBL     | label       | labels for leadframe pins                |
+| BONDWIRE    | drawing     | bondwire                                 |
+| BALL        | label       | position of the ball of a bondwire       |
+| WEDGE       | label       | position of the wedge of a bondwire      |
+| DEF_CHIP    | drawing     | outline of the chip                      |
+| DEF_PAD     | drawing     | bond pads (opening in passivation)       |
+| DEF_MARK    | drawing     | markings (noticeable layout structures)  |
+| PKG_OUT     | drawing     | outline of the package                   |
 
 ## Usage
 

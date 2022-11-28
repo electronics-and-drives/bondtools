@@ -44,6 +44,7 @@ drDefineColor(
  ( display       magenta      255      0        255      )
  ( display       yellow       255      255      0        )
  ( display       purple       153      0        230      )
+ ( display       maroon       230      31       13       )
 )
 
 drDefineStipple(
@@ -99,4 +100,5 @@ drDefinePacket(
  ( display      PKG_LBL              blank      solid      lime       lime       solid         )
  ( display      BALL                 blank      solid      magenta    magenta    solid         )
  ( display      WEDGE                blank      solid      purple     purple     solid         )
+ ( display      PKG_OUT              blank      snasolid   maroon     maroon     outline       )
 )
