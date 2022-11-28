@@ -168,6 +168,13 @@ Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/p
 | JLCC_44_PB_F86315 | 44         | 0.34x0.34        |  PB-F86315      |
 | JLCC_68_PB_F86764 | 68         | 0.4x0.4          |  PB-F86764      |
 
+### Electronics & Drives
+
+| Cell Name         | Lead Count |
+| ----------------- | ---------- |
+| ED60_V1           | 60         |
+
+
 ## Acronyms
 
 | Acronym           | Description                                  |
