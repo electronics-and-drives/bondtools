@@ -2406,7 +2406,7 @@
   label~>isOverbar = nil
   label~>isVisible = t
  
-  dbCreatePolygon(dbD_0x2572911a list(141 -1)
+  dbCreatePolygon(cv list(141 -1)
     list(1.716270e+04:4.300625e+03 1.713730e+04:4.558485e+03 
          1.709160e+04:5.022431e+03 1.709160e+04:5.022450e+03 
          1.709147e+04:5.023700e+03 1.709125e+04:5.024925e+03 
