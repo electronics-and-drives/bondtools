@@ -190,6 +190,9 @@ designs used at Electronics & Drives.
 | ----------------- | ---------- |
 | ED60_V1           | 60         |
 
+The board *ED_60_V1* matches the 
+[E&D Standard IC Die Interfacing System](https://gitlab.reutlingen-university.de/ritter/ed_altium_lib/-/blob/master/00_guidelines/ED60AdapterStandardDraft.pdf),
+which is based on PCI.
 
 ## Acronyms
 
