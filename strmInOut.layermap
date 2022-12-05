@@ -1,12 +1,13 @@
-#########################################
-# Cadence | Cadence |  Bond   | Bond    #
-# layer   | purpose |  layer  | datatyp #
-#---------+---------+---------+---------#
-PKG_MET     drawing    133         0
-PKG_LBL       label    134         0   
-BOND        drawing    135         0
-BALL          label    136         0
-WEDGE         label    137         0
-DEF_CHIP    drawing    138         0
-DEF_PAD     drawing    139         0
-DEF_MARK    drawing    140         0
+#####################################################
+# Virtuoso           | Virtuoso |  Bond   | Bond    #
+# layer              | purpose  |  layer  | datatyp #
+#--------------------+----------+---------+---------#
+PACKAGE_METALIZATION   drawing    133         0
+PACKAGE_LABEL            label    134         0   
+BONDWIRE               drawing    135         0
+BALL                     label    136         0
+WEDGE                    label    137         0
+DEF_CHIP               drawing    138         0
+DEF_PAD                drawing    139         0
+DEF_MARK               drawing    140         0
+PACKAGE_OUTLINE        drawing    141         0
