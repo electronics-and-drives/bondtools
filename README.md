@@ -149,6 +149,20 @@ screenshots below.
 ## Export
 
 You can export the bondplan as *GDS2* using the provided *strmInOut.layermap*.
+To export the bondplan go in menu bar of the CIW to
+   
+   File > Export > Stream...
+
+As a result, the *XStream Out* form will open.
+
+  <img src="./figs/streamout.png" width="500">
+
+Provide first the name of the GDS (*myBondplan.gds* on the example above)
+and secondly lib/cell/view of the bondplan 
+(*Bondplans/myBondplan/layout* in the example above).
+As a last configuration step, please provide *strmInOut.layermap*
+from this repository as *Layer Map*.
+Push the button *Translate* or *Apply* to generate the *GDS*.
 
 Another options is to export a *tikzpicture* with 
 [ml2TikZ](https://github.com/electronics-and-drives/ml2tikz).
@@ -162,13 +176,15 @@ The packages stated below are provided in the library *PACKAGES*.
 
 Vendor : Kyocera ([inch](https://global.kyocera.com/prdct/semicon/semi/std_pkg/pdf/kyocera-pkg-cqfj-e-inch_r0167d.pdf), [mm](https://global.kyocera.com/prdct/semicon/semi/std_pkg/pdf/kyocera-pkg-cqfj-e_r0167d.pdf))
 
-
 | Cell Name         | Lead Count | Die Cavity (AxB) | Drawing Number  |
 | ----------------- | ---------- | ---------------- | --------------- |
 | JLCC_44_PB_F86315 | 44         | 0.34x0.34        |  PB-F86315      |
 | JLCC_68_PB_F86764 | 68         | 0.4x0.4          |  PB-F86764      |
 
 ### Electronics & Drives
+
+The 'packages' in this section correspond to Chip-On-Board (COB)
+designs used at Electronics & Drives.
 
 | Cell Name         | Lead Count |
 | ----------------- | ---------- |
