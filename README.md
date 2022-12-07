@@ -47,7 +47,8 @@ This toolbox is used for creating bonding diagrams at
 
 5. Go to the *CIW* and load the file *packages.il* from the repository.
    You must load this code only once.
-   Reloading is only needed when the packages are updated.
+   Reloading is only needed when the packages 
+   (i.e., the file *packages.il*) are updated.
     ``` scheme
     (load "packages.il")
     ```
@@ -64,17 +65,17 @@ This toolbox is used for creating bonding diagrams at
 
 The following layers are defined by this toolbox:
 
-| Layer       | Purpose     | Description                              |
-| ----------- | ----------- | ---------------------------------------- |
-| PKG_MET     | drawing     | metalization in package                  |
-| PKG_LBL     | label       | labels for leadframe pins                |
-| BONDWIRE    | drawing     | bondwire                                 |
-| BALL        | label       | position of the ball of a bondwire       |
-| WEDGE       | label       | position of the wedge of a bondwire      |
-| DEF_CHIP    | drawing     | outline of the chip                      |
-| DEF_PAD     | drawing     | bond pads (opening in passivation)       |
-| DEF_MARK    | drawing     | markings (noticeable layout structures)  |
-| PKG_OUT     | drawing     | outline of the package                   |
+| Layer Name  | Purpose Name    | Layer No. | Purpose No. | Description                              |
+| ----------- | --------------- | --------- | ----------- | ---------------------------------------- |
+| PKG_MET     | drawing         | 133       | 0           | metalization in package                  |
+| PKG_LBL     | label           | 134       | 0           | labels for leadframe pins                |
+| BONDWIRE    | drawing         | 135       | 0           | bondwire                                 |
+| BALL        | label           | 136       | 0           | position of the ball of a bondwire       |
+| WEDGE       | label           | 137       | 0           | position of the wedge of a bondwire      |
+| DEF_CHIP    | drawing         | 138       | 0           | outline of the chip                      |
+| DEF_PAD     | drawing         | 139       | 0           | bond pads (opening in passivation)       |
+| DEF_MARK    | drawing         | 140       | 0           | markings (noticeable layout structures)  |
+| PKG_OUT     | drawing         | 171       | 0           | outline of the package                   |
 
 ## Usage
 
