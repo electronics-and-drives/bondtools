@@ -68,7 +68,10 @@
       (and
         (dbIsId cv)
         (equal cv~>cellViewType "maskLayout")
-        (equal cv~>mode "a")
+        (or
+          (equal cv~>mode "a")
+          (equal cv~>mode "w")
+        );or
       );and
     then
 
