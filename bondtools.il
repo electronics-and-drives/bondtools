@@ -18,7 +18,7 @@
 *       o EDbondtoolsEnableLogfileCallback
 *    - Symbols   : none
 *
-*   Copyright 2022 Reutlingen University, Electronics & Drives (Germany)
+*   Copyright 2023 Reutlingen University, Electronics & Drives (Germany)
 *
 *   Permission is hereby granted, free of charge, to any person obtaining a 
 *   copy of this software and associated documentation files (the "Software"), 
@@ -77,7 +77,7 @@
 
       (when (stringp sLogfile)
         (setq port (outfile sLogfile "w"))
-        (fprintf port "type1,type2,x1,y1,x2,y2")
+        (fprintf port "name,type1,type2,x1,y1,x2,y2")
       );when
 
       (setq
@@ -160,14 +160,16 @@
           (when (portp port)
             (fprintf
               port
-              "\nball"
+              "\n%s,ball"
+              label
             );fprintf
           );when
         else
           (when (portp port)
             (fprintf
               port
-              "\nwedge"
+              "\n%s,wedge"
+              label
             );fprintf
           );when
         );if
